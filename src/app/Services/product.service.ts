@@ -34,11 +34,26 @@ export class ProductService {
   }
 
   create(product: IProduct): Observable<ExecuteResult<IProduct>> {
+
+
     return this.http.post<ExecuteResult<IProduct>>(
       AppendPathsToBaseUrl(['products', 'AddWithEmail']),
       product
     ).pipe(
-      tap(prod => this.products.push(prod.data!))
+      tap(prod => {
+        let a = this.http.post(
+          AppendPathsToBaseUrl(["ProductImage", "AddDefaultImage"]),
+          null,
+          {
+            params: new HttpParams().append(
+              'productId', prod.data?.id!
+            )
+          }
+        ).subscribe(
+
+        )
+        this.products.push(prod.data!)
+      })
     )
   }
 
