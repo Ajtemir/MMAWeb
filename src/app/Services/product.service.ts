@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {IProduct} from "../Data/DomainModels/Common/IProduct";
 import {HttpClient, HttpErrorResponse, HttpParams} from "@angular/common/http";
 import {ErrorService} from "./error.service";
-import {AppendPathsToBaseUrl, BaseUrl, Host, Port, Protocol} from "../Configurations/Constants/common-constants";
+import {AppendPathsToBaseUrl} from "../Configurations/Constants/common-constants";
 import {catchError, delay, Observable, retry, tap, throwError} from "rxjs";
 import {ExecuteResult} from "../Data/DomainModels/Common/ExecuteResult";
 
@@ -15,6 +15,8 @@ export class ProductService {
     private errorService: ErrorService
     ) {}
 
+  products: IProduct[] = []
+
   getAll() : Observable<ProductsResult>{
     let currentUrl: string = AppendPathsToBaseUrl(['products', 'index'])
     return this.http.get<ProductsResult>(currentUrl, {
@@ -26,20 +28,21 @@ export class ProductService {
       .pipe(
       delay(200),
       retry(2),
+      tap(products => this.products = products.data),
       catchError(this.errorHandler.bind(this))
     )
   }
 
   create(product: IProduct): Observable<ExecuteResult<IProduct>> {
-    let createdProduct = this.http.post<ExecuteResult<IProduct>>(
+    return this.http.post<ExecuteResult<IProduct>>(
       AppendPathsToBaseUrl(['products', 'AddWithEmail']),
       product
+    ).pipe(
+      tap(prod => {
+        console.log(prod)
+        this.products.push(prod.data!)
+      })
     )
-    // createdProduct.subscribe(x=> {
-    //   debugger
-    //   this.http.post(AppendPathsToBaseUrl(['ProductImage', 'AddDefaultImage']), {productId: x.data?.id})
-    // })
-    return createdProduct;
   }
 
   private errorHandler(error: HttpErrorResponse){
