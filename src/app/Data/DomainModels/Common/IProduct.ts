@@ -1,9 +1,9 @@
 export interface IProduct{
   id?:number
-  title:string
+  title?:string
   description:string
   price:number
-  createDate:Date
+  createDate?:Date
   userId:string
   categoryId:number
   images: string[]

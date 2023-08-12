@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ProductService} from "../../Services/product.service";
+import {ModalService} from "../../Services/modal.service";
 
 @Component({
   selector: 'app-create-product',
@@ -9,7 +10,10 @@ import {ProductService} from "../../Services/product.service";
 })
 export class CreateProductComponent {
 
-  constructor(private productService: ProductService) {
+  constructor(
+    private productService: ProductService,
+    private modalService: ModalService,
+  ) {
   }
 
   form = new FormGroup(
@@ -31,12 +35,13 @@ export class CreateProductComponent {
   submit(): void {
     this.productService.create({
       title : this.form.value.title as string,
-      description : '',
+      description : this.form.value.title as string,
       price : 1,
       categoryId : 1,
-      createDate: new Date(),
       images: [''],
-      userId: '',
+      userId: 'first@example.com',
+    })?.subscribe(() => {
+      this.modalService.close()
     })
   }
 }
