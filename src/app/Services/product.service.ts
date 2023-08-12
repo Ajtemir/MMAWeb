@@ -38,10 +38,7 @@ export class ProductService {
       AppendPathsToBaseUrl(['products', 'AddWithEmail']),
       product
     ).pipe(
-      tap(prod => {
-        console.log(prod)
-        this.products.push(prod.data!)
-      })
+      tap(prod => this.products.push(prod.data!))
     )
   }
 
