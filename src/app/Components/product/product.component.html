@@ -1,7 +1,7 @@
 <div class="py-4 px-6 border rounded flex items-center flex-col mb-2 h-50">
-  <img [src]="AppendPathsToBaseUrl([product.images[0] ? product.images[0] : 'images/empty.jpg'])" [alt]="product.title" class="w-1/6 mb-2">
+  <img [src]="AppendPathsToBaseUrl([product.images[0] ? product.images[0] : 'images/empty.jpg'])" [alt]="product.title" class="w-fit mb-2">
   <h2 class="mb-2 text-lg text-center">{{ product.title }}</h2>
-  <p>Price: <span class="font-bold">{{ product.price | currency }}</span></p>
+  <p>Price: <span class="font-bold">{{ (product.price | currency) ?? 'Договорная' }}</span></p>
 
   <button
     class="border py-2 px-4 rounded bg-yellow-400"

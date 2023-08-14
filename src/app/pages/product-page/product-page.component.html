@@ -16,7 +16,7 @@
 
 <div
   *ngIf="productService.products as products"
-  class="md:columns-4 gap-3">
+  class="grid grid-cols-3 gap-5">
   <app-product
     *ngFor="let product of products
       | filterProducts:term
