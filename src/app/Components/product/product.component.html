@@ -6,7 +6,8 @@
 
     <button
         class="border py-2 px-4 rounded bg-green-400 mt-2"
-        (click)="1"
+        (click)="this.router.navigate(['product-detail'],
+        { queryParams: { productId: product.id } })"
     >
         Change Product
     </button>

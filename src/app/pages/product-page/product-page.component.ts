@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {ProductService} from "../../Services/product.service";
 import {ModalService} from "../../Services/modal.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-product-page',
