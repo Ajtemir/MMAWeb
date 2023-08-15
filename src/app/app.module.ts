@@ -15,6 +15,7 @@ import { ProductPageComponent } from './pages/product-page/product-page.componen
 import { AboutPageComponent } from './pages/about-page/about-page.component';
 import {AppRoutingModule} from "./app-routing.module";
 import { NavigationComponent } from './components/navigation/navigation.component';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { NavigationComponent } from './components/navigation/navigation.componen
     ProductPageComponent,
     AboutPageComponent,
     NavigationComponent,
+    ProductDetailComponent,
   ],
   imports: [
     BrowserModule,

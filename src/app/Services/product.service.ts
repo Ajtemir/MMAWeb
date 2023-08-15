@@ -33,6 +33,15 @@ export class ProductService {
     )
   }
 
+  getProductId(productId: number) : Observable<ExecuteResult<IProduct>> {
+      let product: Observable<ExecuteResult<IProduct>> = this.http.get<ExecuteResult<IProduct>>(AppendPathsToBaseUrl(['Products', 'GetById']), {
+          params:{
+              productId: productId,
+          }
+      })
+      return product
+  }
+
   create(product: IProduct): Observable<ExecuteResult<IProduct>> {
 
 
